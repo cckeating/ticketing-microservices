@@ -1,0 +1,8 @@
+# Enable ingress controller
+minikube addons enable ingress
+
+# Expose ingress controller
+kubectl expose deployment ingress-nginx-controller --target-port=80 --type=NodePort -n kube-system
+
+# Set Secrets
+kubectl create secret generic jwt-secret --from-literal=JWT_KEY=qwertyasdf
