@@ -9,6 +9,7 @@ describe('DELETE /api/orders/:orderId', () => {
   it('Marks an order as cancelled', async () => {
     // Create ticket
     const ticket = Ticket.build({
+      id: mongoose.Types.ObjectId().toHexString(),
       title: 'concert',
       price: 20,
     });
@@ -40,6 +41,8 @@ describe('DELETE /api/orders/:orderId', () => {
   it('Emits an order cancelled event', async () => {
     // Create ticket
     const ticket = Ticket.build({
+      id: mongoose.Types.ObjectId().toHexString(),
+
       title: 'concert',
       price: 20,
     });

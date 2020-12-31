@@ -20,6 +20,7 @@ describe('POST /api/orders', () => {
 
   it('Returns error if the ticket is already reserved', async () => {
     const ticket = Ticket.build({
+      id: mongoose.Types.ObjectId().toHexString(),
       title: 'concert',
       price: 20,
     });
@@ -45,6 +46,7 @@ describe('POST /api/orders', () => {
   // Could also check response values, and check db for saved order
   it('Reserves a ticket successfully', async () => {
     const ticket = Ticket.build({
+      id: mongoose.Types.ObjectId().toHexString(),
       title: 'concert',
       price: 20,
     });
@@ -61,6 +63,7 @@ describe('POST /api/orders', () => {
 
   it('Emits an order created event', async () => {
     const ticket = Ticket.build({
+      id: mongoose.Types.ObjectId().toHexString(),
       title: 'concert',
       price: 20,
     });

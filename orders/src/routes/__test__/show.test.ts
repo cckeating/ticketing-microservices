@@ -1,4 +1,5 @@
 import request from 'supertest';
+import mongoose from 'mongoose';
 import { app } from '../../app';
 import { Ticket } from '../../models/ticket';
 
@@ -6,6 +7,8 @@ describe('GET /api/orders/:orderId', () => {
   it('Fetches the order', async () => {
     // Create ticket
     const ticket = Ticket.build({
+      id: mongoose.Types.ObjectId().toHexString(),
+
       title: 'concert',
       price: 20,
     });
@@ -33,6 +36,7 @@ describe('GET /api/orders/:orderId', () => {
   it('Should throw an error if the ticket is not owned by the user', async () => {
     // Create ticket
     const ticket = Ticket.build({
+      id: mongoose.Types.ObjectId().toHexString(),
       title: 'concert',
       price: 20,
     });
