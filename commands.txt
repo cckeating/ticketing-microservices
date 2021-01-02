@@ -6,3 +6,4 @@ kubectl expose deployment ingress-nginx-controller --target-port=80 --type=NodeP
 
 # Set Secrets
 kubectl create secret generic jwt-secret --from-literal=JWT_KEY=qwertyasdf
+kubectl create secret generic jwt-secret --from-literal=STRIPE_KEY=qwertyasdf

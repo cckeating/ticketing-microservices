@@ -4,10 +4,7 @@ import { json } from 'body-parser';
 import { NotFoundError, errorHandler } from '@ccktickets/common';
 
 import cookieSession from 'cookie-session';
-import { createTicketRouter } from './routes/new';
-import { showTicketRouter } from './routes/show';
-import { indexTicketRouter } from './routes';
-import { updateTicketRouter } from './routes/update';
+import { createChargeRouter } from './routes/new';
 
 const app = express();
 
@@ -21,10 +18,7 @@ app.use(
   })
 );
 
-app.use(updateTicketRouter);
-app.use(indexTicketRouter);
-app.use(showTicketRouter);
-app.use(createTicketRouter);
+app.use(createChargeRouter);
 
 app.all('*', async () => {
   throw new NotFoundError();
