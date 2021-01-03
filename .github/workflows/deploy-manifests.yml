@@ -1,0 +1,18 @@
+name: deploy-manifests
+
+on:
+  push:
+    branches: 
+      - main
+    paths:
+      - 'infra/**'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: steebchen/kubectl@master
+        env:
+          KUBE_CONFIG_DATA: ${{secrets.KUBE_CONFIG_DATA}}
+        with:
+          args: '"apply -f infra/k8s"'
