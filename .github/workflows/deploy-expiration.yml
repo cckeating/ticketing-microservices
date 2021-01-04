@@ -1,0 +1,24 @@
+name: deploy-expiration
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'expiration/**'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: cd expiration && docker build -t connerkeating/expiration .
+      - run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+        env:
+          DOCKER_USERNAME: ${{secrets.DOCKER_USERNAME}}
+          DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+      - run: docker push connerkeating/expiration
+      - uses: steebchen/kubectl@master
+        env:
+          KUBE_CONFIG_DATA: ${{secrets.KUBE_CONFIG_DATA}}
+        with:
+          args: '"rollout restart deployment expiration-depl"'
